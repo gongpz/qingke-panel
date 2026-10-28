@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>轻壳面板 · Qingke Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div id="login-screen" class="hidden">
+  <div class="login-card">
+    <div class="login-logo">轻</div>
+    <h1>轻壳面板</h1>
+    <p class="login-sub">Lightweight Website Manager</p>
+    <input id="login-user" type="text" placeholder="用户名" autocomplete="username">
+    <input id="login-pass" type="password" placeholder="管理密码" autocomplete="current-password">
+    <button id="login-btn" class="btn btn-primary btn-block">登 录</button>
+    <div id="login-msg" class="login-msg"></div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-name">轻壳面板</span>
+      <span class="brand-ver">v2.0.0</span>
+    </div>
+    <nav id="nav">
+      <a class="nav-item active" data-view="overview"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14a7 7 0 0 1 14 0"/><path d="M10 14l3.2-3.6"/></svg></span>概览</a>
+      <a class="nav-item" data-view="sites"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M3 10h14"/><ellipse cx="10" cy="10" rx="4.2" ry="7"/></svg></span>网站</a>
+      <a class="nav-item" data-view="apps"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="3.2" width="5.6" height="5.6" rx="1.5"/><rect x="11.2" y="3.2" width="5.6" height="5.6" rx="1.5"/><rect x="3.2" y="11.2" width="5.6" height="5.6" rx="1.5"/><rect x="11.2" y="11.2" width="5.6" height="5.6" rx="1.5"/></svg></span>应用市场</a>
+      <a class="nav-item" data-view="files"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 6.4A1.6 1.6 0 0 1 4.4 4.8h2.6l1.9 2.2h6.7a1.6 1.6 0 0 1 1.6 1.6v6.4a1.6 1.6 0 0 1-1.6 1.6H4.4a1.6 1.6 0 0 1-1.6-1.6z"/></svg></span>文件</a>
+      <a class="nav-item" data-view="monitor"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 10.5h3.2l2-5 3.1 9.5 2.3-4.5h4.4"/></svg></span>监控</a>
+      <a class="nav-item" data-view="ftp"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4h11.6"/><path d="M11.7 4.9 14.6 7.4l-2.9 2.5"/><path d="M17 12.6H5.4"/><path d="M8.3 10.1 5.4 12.6l2.9 2.5"/></svg></span>FTP</a>
+      <a class="nav-item" data-view="cron"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M10 5.8V10l2.9 1.8"/></svg></span>计划任务</a>
+      <a class="nav-item" data-view="logs"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.4 5.5h9.1"/><path d="M7.4 10h9.1"/><path d="M7.4 14.5h6"/><circle cx="4.4" cy="5.5" r=".9" fill="currentColor" stroke="none"/><circle cx="4.4" cy="10" r=".9" fill="currentColor" stroke="none"/><circle cx="4.4" cy="14.5" r=".9" fill="currentColor" stroke="none"/></svg></span>日志</a>
+      <a class="nav-item" data-view="settings"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3.4"/><path d="M11.6 7H17"/><path d="M3 13h8"/><path d="M15.8 13H17"/><circle cx="9.2" cy="7" r="2"/><circle cx="13.8" cy="13" r="2"/></svg></span>设置</a>
+    </nav>
+    <div class="sidebar-foot">
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h2 id="page-title">概览</h2>
+      <div class="topbar-right">
+        <button id="release-btn" class="btn btn-outline btn-mini" title="清理内存缓存，释放 CPU/内存资源">一键释放资源</button>
+        <button id="theme-toggle" class="theme-btn" title="切换深色/浅色主题">🌙</button>
+        <span id="sys-host" class="muted host-chip" title="服务器主机名"></span>
+        <button id="logout-btn" class="btn btn-logout">退出登录</button>
+      </div>
+    </header>
+
+    <section id="view-overview" class="view">
+      <div class="hero">
+        <div class="hero-main">
+          <div class="hero-eyebrow"><span class="pulse" id="hero-pulse"></span><span id="hero-status">系统运行正常</span></div>
+          <h1><span id="hero-greet">你好</span>，<em id="hero-host">服务器</em></h1>
+          <div class="hero-sub" id="hero-sub">正在获取系统状态…</div>
+        </div>
+        <div class="hero-side">
+          <span class="hero-pill">运行时间 <b id="hero-uptime">--</b></span>
+          <span class="hero-pill">系统负载 <b id="hero-load">--</b></span>
+          <span class="hero-pill hero-clock" id="hero-clock">--:--:--</span>
+        </div>
+      </div>
+
+      <div class="grid cards stat-cards">
+        <div class="card stat-card" data-tone="cpu">
+          <div class="stat-head">
+            <div class="stat-meta">
+              <span class="stat-badge badge-green">CPU 使用率</span>
+              <span class="stat-value"><span id="stat-cpu">--</span></span>
+              <span class="stat-sub" id="stat-cpu-sub"></span>
+            </div>
+            <div class="ring" data-ring="cpu">
+              <svg viewBox="0 0 64 64"><circle class="ring-track" cx="32" cy="32" r="26" pathLength="100"/><circle class="ring-fill" cx="32" cy="32" r="26" pathLength="100"/></svg>
+              <span class="ring-pct" id="ring-cpu">--</span>
+            </div>
+          </div>
+          <div class="bar"><div class="bar-fill bar-green" id="bar-cpu" style="width:0%"></div></div>
+        </div>
+        <div class="card stat-card" data-tone="mem">
+          <div class="stat-head">
+            <div class="stat-meta">
+              <span class="stat-badge badge-orange">内存使用</span>
+              <span class="stat-value"><span id="stat-mem-pct">--</span></span>
+              <span class="stat-sub" id="stat-mem">--</span>
+            </div>
+            <div class="ring" data-ring="mem">
+              <svg viewBox="0 0 64 64"><circle class="ring-track" cx="32" cy="32" r="26" pathLength="100"/><circle class="ring-fill" cx="32" cy="32" r="26" pathLength="100"/></svg>
+              <span class="ring-pct" id="ring-mem">--</span>
+            </div>
+          </div>
+          <div class="bar"><div class="bar-fill bar-orange" id="bar-mem" style="width:0%"></div></div>
+        </div>
+        <div class="card stat-card" data-tone="disk">
+          <div class="stat-head">
+            <div class="stat-meta">
+              <span class="stat-badge badge-teal">磁盘使用</span>
+              <span class="stat-value"><span id="stat-disk-pct">--</span></span>
+              <span class="stat-sub" id="stat-disk">--</span>
+            </div>
+            <div class="ring" data-ring="disk">
+              <svg viewBox="0 0 64 64"><circle class="ring-track" cx="32" cy="32" r="26" pathLength="100"/><circle class="ring-fill" cx="32" cy="32" r="26" pathLength="100"/></svg>
+              <span class="ring-pct" id="ring-disk">--</span>
+            </div>
+          </div>
+          <div class="bar"><div class="bar-fill bar-teal" id="bar-disk" style="width:0%"></div></div>
+        </div>
+        <div class="card stat-card" data-tone="net">
+          <div class="stat-head">
+            <div class="stat-meta">
+              <span class="stat-badge badge-blue">NGINX 状态</span>
+              <span class="stat-value"><span id="stat-nginx">--</span></span>
+              <span class="stat-sub" id="stat-nginx-sub"></span>
+            </div>
+            <div class="ring" data-ring="nginx">
+              <svg viewBox="0 0 64 64"><circle class="ring-track" cx="32" cy="32" r="26" pathLength="100"/><circle class="ring-fill" cx="32" cy="32" r="26" pathLength="100"/></svg>
+              <span class="ring-pct" id="ring-nginx">--</span>
+            </div>
+          </div>
+          <div class="bar"><div class="bar-fill bar-blue" id="bar-nginx" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-title">站点概况</div>
+          <table class="kv">
+            <tr><td>已建站数</td><td id="ov-sites">--</td></tr>
+            <tr><td>绑定域名数</td><td id="ov-domains">--</td></tr>
+            <tr><td>端口占用</td><td id="ov-ports">--</td></tr>
+          </table>
+        </div>
+        <div class="card" id="ov-net-card">
+          <div class="card-title">实时网络流量</div>
+          <table class="kv">
+            <tr><td>接收</td><td id="ov-rx">--</td></tr>
+            <tr><td>发送</td><td id="ov-tx">--</td></tr>
+          </table>
+          <div class="spark-wrap"><canvas id="spark-net"></canvas></div>
+          <div class="spark-legend">
+            <span><i style="background:var(--c-net)"></i>接收</span>
+            <span><i style="background:var(--c-err)"></i>发送</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="card-title">系统信息</div>
+          <table class="kv">
+            <tr><td>主机名</td><td id="ov-host">--</td></tr>
+            <tr><td>内核版本</td><td id="ov-kernel">--</td></tr>
+            <tr><td>系统负载</td><td id="ov-load">--</td></tr>
+            <tr><td>进程数</td><td id="ov-procs">--</td></tr>
+            <tr><td>运行时间</td><td id="ov-uptime">--</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">累计流量</div>
+          <table class="kv">
+            <tr><td>累计接收</td><td id="ov-rx-total">--</td></tr>
+            <tr><td>累计发送</td><td id="ov-tx-total">--</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-sites" class="view hidden">
+      <div class="toolbar">
+        <button id="new-site-btn" class="btn btn-primary">+ 新建网站</button>
+        <button id="renew-ssl-btn" class="btn btn-outline">续期全部证书</button>
+        <button id="reload-nginx-btn" class="btn btn-outline">重载 Nginx</button>
+      </div>
+      <div id="site-list" class="card"></div>
+    </section>
+
+    <section id="view-apps" class="view hidden">
+      <div class="toolbar">
+        <button id="apps-refresh" class="btn btn-ghost">刷新</button>
+        <span class="toolbar-sep"></span>
+        <span class="muted small">应用市场：一键安装运行环境（PHP / Node.js / Python / SQLite）。安装 PHP 后，在「设置 → 功能开关」开启 PHP 支持，网站即可选择 PHP 运行环境。</span>
+      </div>
+      <div id="apps-list" class="grid cols-2"></div>
+      <div id="apps-log-card" class="card hidden" style="margin-top:16px">
+        <div class="card-title">安装日志</div>
+        <pre id="apps-log" class="mono" style="max-height:320px;overflow:auto;white-space:pre-wrap;font-size:12px"></pre>
+      </div>
+    </section>
+
+    <section id="view-files" class="view hidden">
+      <div class="file-head">
+        <div class="file-toolbar">
+          <select id="file-root" class="select"></select>
+          <button id="up-btn" class="btn btn-ghost">上级</button>
+          <button id="refresh-btn" class="btn btn-ghost">刷新</button>
+          <span class="toolbar-sep"></span>
+          <button id="mkdir-btn" class="btn btn-ghost">新建目录</button>
+          <button id="newfile-btn" class="btn btn-ghost">新建文件</button>
+          <button id="paste-btn" class="btn btn-primary hidden">粘贴</button>
+          <label class="btn btn-ghost">上传
+            <input id="upload-input" type="file" multiple hidden>
+          </label>
+        </div>
+      </div>
+      <div id="sel-bar" class="sel-bar hidden">
+        <span id="sel-count">已选 0 项</span>
+        <button id="sel-copy" class="btn btn-mini btn-outline">复制</button>
+        <button id="sel-move" class="btn btn-mini btn-outline">移动</button>
+        <button id="sel-zip" class="btn btn-mini btn-outline">压缩</button>
+        <button id="sel-delete" class="btn btn-mini btn-danger">删除</button>
+        <button id="sel-clear" class="btn btn-mini btn-ghost">取消选择</button>
+      </div>
+      <div class="card file-card">
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <table class="table file-table" id="file-table">
+          <thead><tr><th style="width:32px"></th><th>名称</th><th>大小</th><th>修改时间</th><th style="width:330px">操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-monitor" class="view hidden">
+      <div class="grid mon-grid">
+        <div class="card mon-card">
+          <div class="mon-head">
+            <span class="mon-dot dot-cpu"></span>
+            <span class="card-title">CPU 使用率</span>
+            <span class="mon-now" id="mon-cpu-now">--</span>
+          </div>
+          <canvas id="ch-cpu" height="160"></canvas>
+        </div>
+        <div class="card mon-card">
+          <div class="mon-head">
+            <span class="mon-dot dot-mem"></span>
+            <span class="card-title">内存使用率</span>
+            <span class="mon-now" id="mon-mem-now">--</span>
+          </div>
+          <canvas id="ch-mem" height="160"></canvas>
+        </div>
+        <div class="card mon-card">
+          <div class="mon-head">
+            <span class="mon-dot dot-disk"></span>
+            <span class="card-title">磁盘使用率</span>
+            <span class="mon-now" id="mon-disk-now">--</span>
+          </div>
+          <canvas id="ch-disk" height="160"></canvas>
+        </div>
+        <div class="card mon-card">
+          <div class="mon-head">
+            <span class="mon-dot dot-net"></span>
+            <span class="card-title">网络流量</span>
+            <span class="mon-now" id="mon-net-now">--</span>
+          </div>
+          <canvas id="ch-net" height="160"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-ftp" class="view hidden">
+      <div class="toolbar">
+        <button id="ftp-add-btn" class="btn btn-primary">+ 新建 FTP 账号</button>
+        <button id="ftp-refresh" class="btn btn-ghost">刷新</button>
+        <span class="toolbar-sep"></span>
+        <span class="muted small">FTP 服务端口：<b>21</b> · 服务地址：<span id="ftp-addr">--</span></span>
+      </div>
+      <div class="card">
+        <table class="table" id="ftp-table">
+          <thead><tr><th>账号</th><th>密码</th><th>分配目录</th><th style="width:220px">操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-cron" class="view hidden">
+      <div class="toolbar">
+        <button id="cron-add-btn" class="btn btn-primary">+ 新建计划任务</button>
+        <button id="cron-refresh" class="btn btn-ghost">刷新</button>
+        <span class="toolbar-sep"></span>
+        <span class="muted small">格式：分 时 日 月 周（如 <code>*/5 * * * *</code>）</span>
+      </div>
+      <div class="card">
+        <table class="table" id="cron-table">
+          <thead><tr><th>名称</th><th>时间规则</th><th>类型</th><th>内容</th><th>上次执行</th><th>结果</th><th style="width:150px">操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-logs" class="view hidden">
+      <div class="toolbar">
+        <select id="log-lines" class="select">
+          <option value="50">最近 50 条</option>
+          <option value="100" selected>最近 100 条</option>
+          <option value="200">最近 200 条</option>
+          <option value="500">最近 500 条</option>
+        </select>
+        <button id="log-refresh" class="btn btn-ghost">刷新</button>
+        <span class="toolbar-sep"></span>
+        <span class="muted small">仅显示关键操作：建站、删站、文件增删改、FTP、账号、目录、计划任务等</span>
+      </div>
+      <div class="card">
+        <table class="table" id="log-table">
+          <thead><tr><th style="width:150px">时间</th><th style="width:130px">操作</th><th>详情</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-settings" class="view hidden">
+      <div class="settabs">
+        <button class="settab-btn active" data-settab="base">基本信息</button>
+        <button class="settab-btn" data-settab="feat">功能开关</button>
+        <button class="settab-btn" data-settab="err">错误页管理</button>
+        <button class="settab-btn" data-settab="mod">模块管理</button>
+      </div>
+      <div id="settab-base" class="settab-pane active">
+        <div class="grid cols-2">
+          <div class="card">
+            <div class="card-title">个人资料</div>
+            <label class="small muted">当前用户名</label>
+            <input id="set-old-user" type="text" placeholder="当前用户名" class="field" autocomplete="off">
+            <label class="small muted">当前密码</label>
+            <input id="set-old-pass" type="password" placeholder="当前密码" class="field" autocomplete="off">
+            <label class="small muted">新用户名</label>
+            <input id="set-new-user" type="text" placeholder="新用户名" class="field" autocomplete="off">
+            <label class="small muted">新密码（至少 6 位）</label>
+            <input id="set-new-pass" type="password" placeholder="新密码（至少 6 位）" class="field" autocomplete="off">
+            <button id="set-pass-btn" class="btn btn-primary">保存</button>
+            <div id="set-pass-msg" class="msg"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">面板端口</div>
+            <div class="muted small">修改后面板会自动重启，请用新端口重新访问。</div>
+            <div class="kv">
+              <div class="row"><span>当前端口</span><span id="cfg-running-port">--</span></div>
+              <div class="row"><span>配置端口</span><span id="cfg-configured-port">--</span></div>
+            </div>
+            <div class="row" style="display:flex;gap:8px;margin-top:10px">
+              <input id="set-port" type="number" min="1" max="65535" placeholder="新端口" class="field" style="flex:1;margin-bottom:0">
+              <button id="set-port-btn" class="btn btn-primary">修改</button>
+            </div>
+            <div id="set-port-msg" class="msg"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">关于</div>
+            <table class="kv">
+              <tr><td>面板版本</td><td id="info-ver">--</td></tr>
+              <tr><td>主机名</td><td id="info-host">--</td></tr>
+            <tr><td>管理地址</td><td id="info-url">--</td></tr>
+            </table>
+            <div class="muted small">纯静态前端 + Python 标准库后端，无任何第三方依赖。</div>
+          </div>
+        </div>
+      </div>
+      <div id="settab-feat" class="settab-pane hidden">
+        <div class="card">
+          <div class="card-title">功能开关</div>
+          <div class="muted small">默认仅支持静态 HTML 站点。开启「PHP 支持」后，新建/配置网站时可选 PHP 运行环境（需要先在应用市场安装 PHP 8.2）。</div>
+          <div style="margin:12px 0">
+            <label class="check">
+              <input type="checkbox" id="feat-php"> <b>PHP 支持</b>
+              <span class="muted small" style="display:block;margin-left:24px">启用后站点可选 PHP 运行环境（nginx + php-fpm），并显示 PHP 安装状态</span>
+            </label>
+          </div>
+          <div id="feat-php-status" class="muted small"></div>
+          <button id="feat-save" class="btn btn-primary" style="margin-top:10px">保存</button>
+          <div id="feat-msg" class="msg"></div>
+        </div>
+      </div>
+      <div id="settab-err" class="settab-pane hidden">
+        <div class="card">
+          <div class="card-title">错误页管理</div>
+          <div class="muted small">管理全局默认错误页。所有站点未自定义错误码时，统一显示这里的默认页面，修改后立即生效；站点级覆盖仍在站点「配置 → 管理错误页内容」中设置。</div>
+          <div class="table-wrap" style="margin-top:10px">
+            <table class="table" id="edef-table">
+              <thead><tr><th style="width:70px">错误码</th><th style="width:180px">名称</th><th style="width:120px">文件</th><th style="width:400px">操作</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="settab-mod" class="settab-pane hidden">
+        <div class="card">
+          <div class="card-title">模块管理</div>
+          <div class="muted small">默认仅启用基础功能，保证面板精简、不消耗资源。勾选安装后自动重启面板生效；取消勾选可释放对应资源（端口 / 线程）。</div>
+          <div id="mod-list" style="margin:10px 0"></div>
+          <button id="mod-save" class="btn btn-primary">保存并重启</button>
+          <div id="mod-msg" class="msg"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>© 2026 轻壳面板 Qingke Panel</span>
+    <span class="foot-sep">·</span>
+    <span>版本 <span id="foot-ver">2.0.0</span></span>
+    <span class="foot-sep">·</span>
+    <span id="foot-res">资源信息加载中…</span>
+  </footer>
+</div>
+
+<div id="modal" class="hidden">
+  <div class="modal-mask" id="modal-mask"></div>
+  <div class="modal-box" id="modal-box"></div>
+</div>
+
+<div id="toast" class="hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

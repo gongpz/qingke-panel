@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>405 方法不允许</title>
+<style>
+:root{
+  --bg:#F2F4F9;
+  --tint-a:rgba(108,123,255,.16);
+  --tint-b:rgba(162,89,255,.11);
+  --tint-c:rgba(34,211,238,.12);
+  --card:rgba(255,255,255,.78);
+  --line:rgba(16,24,40,.085);
+  --line-2:rgba(16,24,40,.16);
+  --t1:#0E1322;
+  --t2:#4A536B;
+  --t3:#8A92A8;
+  --grad:linear-gradient(115deg,#6C7BFF 0%,#A259FF 52%,#22D3EE 100%);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#06070B;
+    --tint-a:rgba(91,108,255,.30);
+    --tint-b:rgba(162,89,255,.20);
+    --tint-c:rgba(34,211,238,.16);
+    --card:rgba(22,27,39,.78);
+    --line:rgba(255,255,255,.075);
+    --line-2:rgba(255,255,255,.15);
+    --t1:#EDF0F8;
+    --t2:#A3ABC2;
+    --t3:#6B7488;
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--t2);
+  display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;
+  -webkit-font-smoothing:antialiased;
+}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.6}
+.aurora i{position:absolute;display:block;border-radius:50%;filter:blur(90px)}
+.aurora i:nth-child(1){
+  width:46vw;height:46vw;min-width:420px;min-height:420px;top:-14vw;left:-8vw;
+  background:var(--tint-a);animation:da 26s cubic-bezier(.4,0,.2,1) infinite alternate;
+}
+.aurora i:nth-child(2){
+  width:38vw;height:38vw;min-width:340px;min-height:340px;top:12vh;right:-10vw;
+  background:var(--tint-b);animation:db 32s cubic-bezier(.4,0,.2,1) infinite alternate;
+}
+.aurora i:nth-child(3){
+  width:42vw;height:42vw;min-width:380px;min-height:380px;bottom:-18vw;left:26vw;
+  background:var(--tint-c);animation:dc 38s cubic-bezier(.4,0,.2,1) infinite alternate;
+}
+@keyframes da{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(8vw,6vh,0) scale(1.14)}100%{transform:translate3d(-4vw,12vh,0) scale(1.05)}}
+@keyframes db{0%{transform:translate3d(0,0,0) scale(1.08)}50%{transform:translate3d(-10vw,10vh,0) scale(1)}100%{transform:translate3d(-3vw,-6vh,0) scale(1.18)}}
+@keyframes dc{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-8vw,-10vh,0) scale(1.2)}100%{transform:translate3d(6vw,-4vh,0) scale(1.06)}}
+.card{
+  position:relative;z-index:1;
+  background:var(--card);border:1px solid var(--line);border-radius:22px;
+  box-shadow:0 4px 8px -2px rgba(16,24,40,.08),0 28px 56px -16px rgba(16,24,40,.18);
+  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
+  max-width:560px;width:100%;padding:52px 40px;text-align:center;overflow:hidden;
+  animation:cin .62s cubic-bezier(.22,1,.36,1) both;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:14%;right:14%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+}
+@keyframes cin{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.code{
+  font-size:96px;font-weight:800;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:4px;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.zh{font-size:22px;font-weight:650;margin-top:16px;color:var(--t1);letter-spacing:.5px}
+.en{
+  font-size:11.5px;color:var(--t3);margin-top:7px;
+  letter-spacing:2px;text-transform:uppercase;
+}
+.desc{font-size:14.5px;color:var(--t2);margin-top:24px;line-height:1.75}
+.btn{
+  position:relative;overflow:hidden;
+  margin-top:32px;display:inline-block;padding:11px 30px;border-radius:12px;
+  background:var(--grad);background-size:180% 180%;background-position:0% 50%;
+  color:#fff;text-decoration:none;font-size:14px;font-weight:500;
+  box-shadow:0 4px 14px -4px rgba(108,123,255,.6);
+  transition:background-position .5s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1),box-shadow .3s;
+}
+.btn:hover{
+  background-position:100% 50%;transform:translateY(-1px);
+  box-shadow:0 6px 20px -4px rgba(108,123,255,.8);
+}
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:11.5px;color:var(--t3);letter-spacing:.3px}
+@media(max-width:520px){
+  .card{padding:40px 24px}
+  .code{font-size:72px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .aurora{display:none}
+}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="card">
+  <div class="code">405</div>
+  <div class="zh">方法不允许</div>
+  <div class="en">Method Not Allowed</div>
+  <div class="desc">当前请求方式不受支持，请使用正确的请求方法。</div>
+  <a class="btn" href="/">返回首页</a>
+  <div class="foot">Powered by 轻壳面板 Qingke Panel</div>
+</div>
+</body>
+</html>

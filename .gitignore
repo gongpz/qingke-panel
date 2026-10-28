@@ -1,0 +1,20 @@
+# ---- 密钥 / 运行时配置：绝不提交 ----
+SSH密码.txt
+panel.conf
+ssl/
+
+# ---- 发布包 / 二进制 ----
+*.tar.gz
+*.tar.gz.sha256
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
